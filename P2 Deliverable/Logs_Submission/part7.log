@@ -1,0 +1,44 @@
+COMP421 Project Deliverable #2 Part 7
+
+psql cs421 < sql/part7_view1.sql
+
+-- View 1) 
+-- This view represents the average age per event of the people that rsvped that they are ‘going’ to said event.
+-- Create the view:
+CREATE VIEW eventt_average_ages (eventt_id, average_age) AS SELECT t1.eventt_id, AVG(age(usert.birth_date)) AS avgage FROM (SELECT * FROM eventt_subscription WHERE rsvp_status = 'going') t1 LEFT JOIN usert ON usert.usert_handle = t1.usert_handle GROUP BY eventt_id ORDER BY avgage;
+CREATE VIEW
+-- Use the view (to find the event with the max average age of people that are going))
+SELECT * FROM eventt_average_ages WHERE average_age = (SELECT MAX(average_age) FROM eventt_average_ages);
+ eventt_id |          average_age          
+-----------+-------------------------------
+        32 | 85 years 1 mon 1 day 22:28:04
+(1 row)
+
+-- Trying to update:
+UPDATE eventt_average_ages SET average_age = age(CURRENT_TIMESTAMP) WHERE eventt_id = 32;
+ERROR:  cannot update view "eventt_average_ages"
+DETAIL:  Views containing GROUP BY are not automatically updatable.
+HINT:  To enable updating the view, provide an INSTEAD OF UPDATE trigger or an unconditional ON UPDATE DO INSTEAD rule.
+
+psql cs421 < sql/part7_view2.sql
+
+-- View 2) 
+-- Create a view that consists of all the users’ with unread notifications usert_handle and the number of each users unread notifications.
+-- Create the view:
+CREATE VIEW unread_notifications (usert_handle, num_of_notifs) AS SELECT usert_handle, COUNT(usert_handle)
+FROM notification
+WHERE read_status = 'f'
+GROUP BY usert_handle; 
+CREATE VIEW
+-- Use the view (to find the users with highest number of unread notifications)
+SELECT usert_handle FROM unread_notifications WHERE num_of_notifs = (SELECT MAX(num_of_notifs) FROM unread_notifications);
+ usert_handle 
+--------------
+ tbettenay33
+(1 row)
+
+-- Trying to update:
+UPDATE unread_notifications SET num_of_notifs = 4 WHERE usert_handle = 'tbettenay33'; 
+ERROR:  cannot update view "unread_notifications"
+DETAIL:  Views containing GROUP BY are not automatically updatable.
+HINT:  To enable updating the view, provide an INSTEAD OF UPDATE trigger or an unconditional ON UPDATE DO INSTEAD rule.

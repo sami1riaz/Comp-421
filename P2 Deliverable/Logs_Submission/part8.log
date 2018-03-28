@@ -1,0 +1,82 @@
+COMP421 Project Deliverable #2 Part 8
+
+psql cs421 < sql/part8_check1.sql
+
+-- Check 1) 
+-- Check that the user is above 18 
+-- Add Constraint:
+ALTER TABLE usert ADD CONSTRAINT minimum_age CHECK (EXTRACT(YEAR FROM age(birth_date)) >= 18);
+ALTER TABLE
+-- Revised Schema:
+\d usert
+                 Table "cs421g16.usert"
+    Column    |            Type             | Modifiers 
+--------------+-----------------------------+-----------
+ usert_handle | character varying(255)      | not null
+ display_name | character varying(255)      | 
+ email        | character varying(255)      | 
+ firstname    | character varying(255)      | 
+ lastname     | character varying(255)      | 
+ gender       | character varying(255)      | 
+ birth_date   | timestamp without time zone | 
+Indexes:
+    "usert_pkey" PRIMARY KEY, btree (usert_handle)
+    "usert_email_key" UNIQUE CONSTRAINT, btree (email)
+Check constraints:
+    "minimum_age" CHECK (date_part('year'::text, age(birth_date)) >= 18::double precision)
+Foreign-key constraints:
+    "usert_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES creator(handle)
+Referenced by:
+    TABLE "commentt" CONSTRAINT "commentt_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "eventt_subscription" CONSTRAINT "eventt_subscription_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "feed_view" CONSTRAINT "feed_view_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "notification" CONSTRAINT "notification_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "page_follower" CONSTRAINT "page_follower_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "page" CONSTRAINT "page_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "submission_like" CONSTRAINT "submission_like_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "usert_friend" CONSTRAINT "usert_friend_friend_handle_fkey" FOREIGN KEY (friend_handle) REFERENCES usert(usert_handle)
+    TABLE "usert_friend" CONSTRAINT "usert_friend_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+
+ 
+-- Trying to violate constraint (update an age to under 18).
+UPDATE usert SET birth_date = '2002-03-01' WHERE usert_handle = 'bworboy4'; 
+ERROR:  new row for relation "usert" violates check constraint "minimum_age"
+DETAIL:  Failing row contains (bworboy4, Baldwin Worboy, bworboy4@columbia.edu, Baldwin, Worboy, Male, 2002-03-01 00:00:00).
+
+psql cs421 < sql/part8_check2.sql
+
+-- Check 2) 
+-- Only allow event that last less than a year
+-- Add Constraint:
+ALTER TABLE eventt ADD CONSTRAINT eventt_time_constraint CHECK ( end_time < (start_time + INTERVAL '1 year'));
+ALTER TABLE
+-- Revised Schema:
+\d eventt
+                                         Table "cs421g16.eventt"
+    Column     |            Type             |                         Modifiers                          
+---------------+-----------------------------+------------------------------------------------------------
+ eventt_id     | integer                     | not null default nextval('eventt_eventt_id_seq'::regclass)
+ handle        | character varying(255)      | not null
+ wall_id       | integer                     | not null
+ creation_time | timestamp without time zone | default now()
+ start_time    | timestamp without time zone | not null
+ end_time      | timestamp without time zone | not null
+ title         | character varying(255)      | not null
+ description   | character varying(1023)     | 
+ location      | character varying(255)      | 
+Indexes:
+    "eventt_pkey" PRIMARY KEY, btree (eventt_id)
+    "eventt_wall_id_key" UNIQUE CONSTRAINT, btree (wall_id)
+Check constraints:
+    "eventt_time_constraint" CHECK (end_time < (start_time + '1 year'::interval))
+Foreign-key constraints:
+    "eventt_handle_fkey" FOREIGN KEY (handle) REFERENCES creator(handle)
+    "eventt_wall_id_fkey" FOREIGN KEY (wall_id) REFERENCES wall(wall_id)
+Referenced by:
+    TABLE "eventt_subscription" CONSTRAINT "eventt_subscription_eventt_id_fkey" FOREIGN KEY (eventt_id) REFERENCES eventt(eventt_id)
+
+ 
+-- Trying to violate constraint (update an event to be last longer than a year):
+UPDATE eventt SET end_time = '2020-06-05' WHERE eventt_id = 1;
+ERROR:  new row for relation "eventt" violates check constraint "eventt_time_constraint"
+DETAIL:  Failing row contains (1, eboughtons, 252, 2017-09-27 03:37:28, 2018-06-04 18:00:30, 2020-06-05 00:00:00, Superhero Movie, strategize mission-critical web services, 6523 Sloan Way).

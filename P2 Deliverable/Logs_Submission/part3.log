@@ -1,0 +1,39 @@
+COMP421 Project Deliverable #2 Part 3
+
+psql cs421 < sql/part3_setup.sql
+
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+
+psql cs421 < sql/part3_insert.sql
+
+-- Insert statements
+INSERT INTO usert VALUES ('John','johnny','john.doe@mail.mcgill.ca','John','Doe','M','12-1-1990');
+INSERT 0 1
+INSERT INTO usert VALUES ('spidey','mary','mary.jane@mail.mcgill.ca','Mary','Jane','F','4-20-1995');
+INSERT 0 1
+INSERT INTO usert VALUES ('Potus','realDonaldTrump','donald.trump@mail.mcgill.ca','Donald','Trump','M','3-3-1950');
+INSERT 0 1
+INSERT INTO usert VALUES ('OB','Obama','barack.obama@mail.mcgill.ca','Barack','Obama','M','8-6-1960');
+INSERT 0 1
+INSERT INTO usert VALUES ('lio','messi','lionel.messi@mail.mcgill.ca','Lionel','Messi','M','10-1-1987');
+INSERT 0 1
+-- Print usert table with inserted data
+SELECT * FROM usert;
+ usert_handle |  display_name   |            email            | firstname | lastname | gender |     birth_date      
+--------------+-----------------+-----------------------------+-----------+----------+--------+---------------------
+ John         | johnny          | john.doe@mail.mcgill.ca     | John      | Doe      | M      | 1990-12-01 00:00:00
+ spidey       | mary            | mary.jane@mail.mcgill.ca    | Mary      | Jane     | F      | 1995-04-20 00:00:00
+ Potus        | realDonaldTrump | donald.trump@mail.mcgill.ca | Donald    | Trump    | M      | 1950-03-03 00:00:00
+ OB           | Obama           | barack.obama@mail.mcgill.ca | Barack    | Obama    | M      | 1960-08-06 00:00:00
+ lio          | messi           | lionel.messi@mail.mcgill.ca | Lionel    | Messi    | M      | 1987-10-01 00:00:00
+(5 rows)
+

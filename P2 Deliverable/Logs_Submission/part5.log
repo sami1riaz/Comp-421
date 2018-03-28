@@ -1,0 +1,116 @@
+COMP421 Project Deliverable #2 Part 5
+
+psql cs421 < sql/part5_query1.sql
+
+-- Query 1) 
+-- Largest age difference between two friends:
+SELECT MAX(ABS(EXTRACT(YEAR FROM t1.birth_date) - EXTRACT(YEAR FROM usert.birth_date))) AS age_difference FROM 
+	(SELECT usert.birth_date, usert_friend.friend_handle FROM usert_friend 
+	LEFT JOIN usert 
+	ON usert.usert_handle = usert_friend.usert_handle) t1 
+LEFT JOIN usert ON t1.friend_handle = usert.usert_handle;
+ age_difference 
+----------------
+             63
+(1 row)
+
+
+psql cs421 < sql/part5_query2.sql
+
+-- Query 2) 
+-- All the couples of friend with age difference higher than X (50 in this example).
+SELECT t1.usert_handle, usert.usert_handle, ABS(EXTRACT(YEAR FROM t1.birth_date) - EXTRACT(YEAR FROM usert.birth_date)) AS age_difference FROM 
+	(SELECT usert.birth_date, usert_friend.usert_handle,
+	usert_friend.friend_handle FROM usert_friend LEFT JOIN usert ON
+	usert.usert_handle = usert_friend.usert_handle) t1 
+LEFT JOIN usert ON t1.friend_handle = usert.usert_handle 
+GROUP BY t1.usert_handle, usert.usert_handle, t1.birth_date, usert.birth_date HAVING ABS(EXTRACT(YEAR FROM t1.birth_date) - EXTRACT(YEAR FROM usert.birth_date)) > 50;
+  usert_handle  |  usert_handle  | age_difference 
+----------------+----------------+----------------
+ amacness1q     | tmacourek10    |             60
+ bportchmouth1c | aspikeings2w   |             55
+ bportchmouth1c | tbeever1h      |             52
+ cfley36        | tloughrey3i    |             57
+ chilleng       | cfley36        |             52
+ cmoody4g       | tglazzard4b    |             61
+ eramas2c       | rhudd2d        |             56
+ hcheel9        | kwordsley1y    |             63
+ hsibthorpea    | hde3d          |             62
+ jhowgego52     | mtitmuss28     |             52
+ jmacvaugh4k    | mgauthorpp3u   |             54
+ kambrogelli1a  | hpersicke31    |             57
+ kbrumfield1x   | iwanklin2o     |             59
+ kwordsley1y    | hcheel9        |             63
+ mgauthorpp3u   | jmacvaugh4k    |             54
+ mlocke11       | jprydie3n      |             53
+ mtauntonl      | jshelp58       |             52
+ mtitmuss28     | jhowgego52     |             52
+ osadgrovey     | kgehricke3h    |             61
+ rhudd2d        | eramas2c       |             56
+ tbeever1h      | bportchmouth1c |             52
+ tbeever1h      | mgauthorpp3u   |             61
+ tglazzard4b    | cmoody4g       |             61
+ tloughrey3i    | cfley36        |             57
+ tmacourek10    | amacness1q     |             60
+(25 rows)
+
+
+psql cs421 < sql/part5_query3.sql
+
+-- Query 3) 
+-- Display names of all users who are ‘going’ to more than one event
+SELECT display_name 
+FROM usert 
+WHERE usert_handle IN 
+	(SELECT usert_handle FROM eventt_subscription 
+	WHERE rsvp_status = 'going' 
+	GROUP BY usert_handle HAVING COUNT(*) > 1);
+    display_name     
+---------------------
+ Bayard Thornber
+ Urson Cowperthwaite
+ Gabriello Nulty
+ Shanon Morse
+ Libbi Buckleigh
+ Lula Caillou
+ Jackelyn Letessier
+ Maribel Wheeler
+ Osmund Royan
+ Kathi Ambrogelli
+ Johann Kelsell
+ Cristiano Shelly
+ Ring Gosz
+ Jesselyn Darville
+(14 rows)
+
+
+psql cs421 < sql/part5_query4.sql
+
+-- Query 4) 
+-- Display names of all users who commented on post 39. Also display the text of their comment.
+SELECT display_name, text_content FROM usert T1 JOIN (SELECT C.usert_handle, S.text_content FROM commentt C, submission S WHERE C.commentt_id = S.submission_id AND C.post_id = 39) T2 ON T1.usert_handle = T2.usert_handle;
+   display_name   |          text_content           
+------------------+---------------------------------
+ Bengt Swoffer    | harness next-generation users
+ Xerxes Gennerich | iterate strategic relationships
+ Sybyl Stebbins   | innovate seamless applications
+ Debra Narracott  | synergize B2C communities
+ Walliw Royds     | matrix global portals
+(5 rows)
+
+
+psql cs421 < sql/part5_query5.sql
+
+-- Query 5) 
+-- Number of comments by gender
+SELECT gender, COUNT(*) 
+FROM commentt C 
+LEFT JOIN usert U 
+ON C.usert_handle = U.usert_handle 
+GROUP BY gender
+ gender | count 
+--------+-------
+ Female |   157
+ Male   |   176
+(2 rows)
+

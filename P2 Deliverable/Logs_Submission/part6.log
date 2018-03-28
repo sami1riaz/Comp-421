@@ -1,0 +1,68 @@
+COMP421 Project Deliverable #2 Part 6
+
+psql cs421 < sql/part6_mod1.sql
+
+-- Modification 1) 
+-- Update the following_count number for each page:
+UPDATE page SET follower_count = (SELECT COUNT(*) FROM page_follower WHERE page_follower.page_handle = page.page_handle); 
+UPDATE 50
+-- Print the results
+SELECT * FROM page LIMIT 10;
+ page_handle  |            description            |                    title                     | follower_count | usert_handle  
+--------------+-----------------------------------+----------------------------------------------+----------------+---------------
+ dbeinke0     | leverage open-source convergence  | Willard                                      |              2 | wambrozewicz0
+ owharlton1   | generate end-to-end deliverables  | Diamonds Are Forever                         |              2 | kjanko1
+ ggentry2     | exploit transparent infomediaries | Tiger and the Snow, The (La tigre e la neve) |              2 | hmckeighan2
+ awinyard3    | expedite distributed schemas      | Skinwalkers                                  |              2 | dnarracott3
+ kswanwick4   | maximize best-of-breed models     | Man Apart, A                                 |              2 | bworboy4
+ vweatherill5 | utilize compelling content        | Pokemon 4 Ever (a.k.a. Pokémon 4: The Movie) |              2 | sgreenleaf5
+ dbecerro6    | extend efficient portals          | Don McKay                                    |              2 | dtolotti6
+ ckolak7      | maximize next-generation content  | Jerichow                                     |              2 | omcmenamy7
+ noxer8       | incubate world-class content      | Ann Carver's Profession                      |              2 | aleyden8
+ hfishenden9  | leverage B2B systems              | Employee of the Month                        |              2 | hcheel9
+(10 rows)
+
+
+psql cs421 < sql/part6_mod2.sql
+
+-- Modification 2)
+-- Delete all event subscriptions to events older than 11 months
+DELETE FROM eventt_subscription WHERE eventt_id IN
+(SELECT (eventt_id) FROM eventt WHERE creation_time < CURRENT_DATE -  INTERVAL '11 months');
+DELETE 27
+-- Delete all events with creation times earlier than 11 months
+DELETE FROM eventt WHERE creation_time < CURRENT_DATE - INTERVAL '11 months';
+DELETE 4
+
+psql cs421 < sql/part6_mod3.sql
+
+-- Modification 3)
+-- Delete all comments with no likes:
+DELETE FROM commentt C WHERE NOT EXISTS (SELECT * FROM submission_like SL WHERE C.commentt_id = SL.submission_id);
+DELETE 133
+-- Delete the corresponding submission for each deleted comment:
+DELETE FROM submission WHERE submission_id NOT IN (SELECT post_id AS submission_id FROM post UNION SELECT commentt_id AS submission_id FROM commentt);
+DELETE 133
+
+psql cs421 < sql/part6_mod4.sql
+
+-- Modification 4) 
+-- Update the like_count number for each submission:
+UPDATE submission SET like_count = (SELECT COUNT(*) FROM submission_like WHERE submission.submission_id = submission_like.submission_id); 
+UPDATE 280
+-- Print the results
+SELECT * FROM submission LIMIT 10;
+ submission_id |            text_content             | like_count |    creation_time    
+---------------+-------------------------------------+------------+---------------------
+           209 | e-enable sticky infomediaries       |          2 | 2017-12-02 01:49:17
+           210 | brand innovative metrics            |          2 | 2017-07-29 05:00:59
+           211 | facilitate e-business experiences   |          2 | 2017-12-18 11:16:40
+           212 | embrace cutting-edge users          |          2 | 2017-03-30 07:55:15
+           213 | redefine plug-and-play deliverables |          2 | 2017-06-25 04:56:11
+           214 | redefine sticky e-markets           |          2 | 2017-07-14 13:49:27
+           215 | grow wireless users                 |          2 | 2017-09-09 21:39:33
+           216 | recontextualize front-end eyeballs  |          2 | 2017-09-17 04:34:32
+           217 | cultivate killer schemas            |          2 | 2018-01-22 00:22:39
+           218 | visualize distributed infomediaries |          2 | 2017-05-24 09:25:53
+(10 rows)
+

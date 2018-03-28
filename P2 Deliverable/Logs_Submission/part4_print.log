@@ -1,0 +1,214 @@
+COMP421 Project Deliverable #2 Part 4
+
+psql cs421 < sql/tables_print_data.sql
+
+SELECT * FROM wall LIMIT 10;
+ wall_id |               description                
+---------+------------------------------------------
+       1 | implement revolutionary functionalities
+       2 | maximize B2C systems
+       3 | disintermediate open-source niches
+       4 | leverage ubiquitous infomediaries
+       5 | visualize cross-platform markets
+       6 | target e-business communities
+       7 | morph frictionless eyeballs
+       8 | visualize collaborative networks
+       9 | grow compelling web-readiness
+      10 | recontextualize bricks-and-clicks niches
+(10 rows)
+
+SELECT * FROM creator LIMIT 10;
+    handle    | wall_id 
+--------------+---------
+ dbeinke0     |       1
+ owharlton1   |       2
+ ggentry2     |       3
+ awinyard3    |       4
+ kswanwick4   |       5
+ vweatherill5 |       6
+ dbecerro6    |       7
+ ckolak7      |       8
+ noxer8       |       9
+ hfishenden9  |      10
+(10 rows)
+
+SELECT * FROM usert LIMIT 10;
+ usert_handle  |     display_name      |             email             |    firstname    |  lastname   | gender |     birth_date      
+---------------+-----------------------+-------------------------------+-----------------+-------------+--------+---------------------
+ wambrozewicz0 | Warren Ambrozewicz    | wambrozewicz0@accuweather.com | Warren          | Ambrozewicz | Male   | 1979-11-18 05:44:37
+ kjanko1       | Kerrill Janko         | kjanko1@mediafire.com         | Kerrill         | Janko       | Female | 1965-11-29 06:58:48
+ hmckeighan2   | Hamish McKeighan      | hmckeighan2@wikispaces.com    | Hamish          | McKeighan   | Male   | 1989-01-06 01:59:53
+ dnarracott3   | Debra Narracott       | dnarracott3@nps.gov           | Debra           | Narracott   | Female | 1977-06-25 05:24:14
+ bworboy4      | Baldwin Worboy        | bworboy4@columbia.edu         | Baldwin         | Worboy      | Male   | 1999-11-05 11:28:37
+ sgreenleaf5   | Staford Greenleaf     | sgreenleaf5@webeden.co.uk     | Staford         | Greenleaf   | Male   | 1985-08-23 03:47:41
+ dtolotti6     | Domingo Tolotti       | dtolotti6@webnode.com         | Domingo         | Tolotti     | Male   | 1997-10-24 15:33:48
+ omcmenamy7    | Obie McMenamy         | omcmenamy7@yellowbook.com     | Obie            | McMenamy    | Male   | 1960-12-16 22:17:05
+ aleyden8      | Alfred Leyden         | aleyden8@wunderground.com     | Alfred          | Leyden      | Male   | 1937-04-05 14:02:53
+ hcheel9       | Helen-elizabeth Cheel | hcheel9@virginia.edu          | Helen-elizabeth | Cheel       | Female | 1996-11-03 19:44:45
+(10 rows)
+
+SELECT * FROM page LIMIT 10;
+ page_handle  |            description            |                    title                     | follower_count | usert_handle  
+--------------+-----------------------------------+----------------------------------------------+----------------+---------------
+ dbeinke0     | leverage open-source convergence  | Willard                                      |              0 | wambrozewicz0
+ owharlton1   | generate end-to-end deliverables  | Diamonds Are Forever                         |              0 | kjanko1
+ ggentry2     | exploit transparent infomediaries | Tiger and the Snow, The (La tigre e la neve) |              0 | hmckeighan2
+ awinyard3    | expedite distributed schemas      | Skinwalkers                                  |              0 | dnarracott3
+ kswanwick4   | maximize best-of-breed models     | Man Apart, A                                 |              0 | bworboy4
+ vweatherill5 | utilize compelling content        | Pokemon 4 Ever (a.k.a. Pokémon 4: The Movie) |              0 | sgreenleaf5
+ dbecerro6    | extend efficient portals          | Don McKay                                    |              0 | dtolotti6
+ ckolak7      | maximize next-generation content  | Jerichow                                     |              0 | omcmenamy7
+ noxer8       | incubate world-class content      | Ann Carver's Profession                      |              0 | aleyden8
+ hfishenden9  | leverage B2B systems              | Employee of the Month                        |              0 | hcheel9
+(10 rows)
+
+SELECT * FROM submission LIMIT 10;
+ submission_id |             text_content              | like_count |    creation_time    
+---------------+---------------------------------------+------------+---------------------
+             1 | maximize frictionless functionalities |          0 | 2017-10-30 19:56:44
+             2 | generate viral supply-chains          |          0 | 2017-11-23 06:00:22
+             3 | enhance dynamic e-business            |          0 | 2017-10-15 03:56:45
+             4 | cultivate cross-media markets         |          0 | 2017-09-06 00:36:37
+             5 | matrix mission-critical deliverables  |          0 | 2017-12-01 02:14:59
+             6 | exploit 24/7 ROI                      |          0 | 2017-10-08 18:44:28
+             7 | generate enterprise initiatives       |          0 | 2017-03-29 10:51:56
+             8 | unleash open-source partnerships      |          0 | 2017-10-27 06:52:16
+             9 | disintermediate B2C web-readiness     |          0 | 2017-03-28 19:08:41
+            10 | benchmark turn-key ROI                |          0 | 2017-11-17 14:06:54
+(10 rows)
+
+SELECT * FROM post LIMIT 10;
+ post_id | view_count |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        attachment_link                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   image                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |    handle     | wall_id 
+---------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+---------
+       1 |          0 | https://technorati.com/amet/sapien/dignissim/vestibulum/vestibulum/ante/ipsum.json?fringilla=nunc&rhoncus=purus&mauris=phasellus&enim=in&leo=felis&rhoncus=donec&sed=semper&vestibulum=sapien&sit=a&amet=libero&cursus=nam&id=dui&turpis=proin&integer=leo&aliquet=odio&massa=porttitor&id=id&lobortis=consequat&convallis=in&tortor=consequat&risus=ut&dapibus=nulla&augue=sed&vel=accumsan&accumsan=felis&tellus=ut&nisi=at&eu=dolor&orci=quis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJ0SURBVDjLlZNbSBRRGMe/2XRWZ2/D7G4sSuYaKVurhMZaIRbm6iaGERSSbz0EPfTSQ4j0ZNRLQq8WPaQgPfQaIWmUJWwrSYolkW2ul7S0Rrbcy+zM7vQ/EovJ2uXAj/+c833nu5xzhtN1nXKN+h6Jc1Sqma/fhPHn574cpG2GYTuDt9quHbe0U0vRiZrqXvHZfwXoHqnTfaZWg8ceII90jPy7mo5W9Vjv5fLltrZwa6RJLzbVkstWQys/FiiakEng7TQ6N0iD7x4vhK+mSjb7522NmFb56PRqKF+OyYLbcQQlFtCT8H0aW5ygHUTiX1uYX75WL690C/PRScwyZDDoNCtPU1vlKB0ueGBpvXy76o8BTpUmu1x5CpGWT6Rn0CMrk6fIdIQcXJwaSjMXfjuDqampXk3T6gGpqsqDMq/Xy918eoaUtEJriSjF1QQdiHcmTjYcKhweHo6nUqk5RVEIumrARs3pdHoQzIOFKzzPc8Fg8GWj2EW1+qX209IN8lPn2d0OoXBoaOiuyWQSksnk9YqKCg+ClHGhUGgPx3EfYrFYMQLIYB9YgnEnywTc+I5Ai6CfoS6wZjQal2RZfmTw+Xzh9fX176jgExxaYBhHBr8gCJPQgNlsfg1thr6FPWCz2Zg2ut1u1sKLjXcwiIHJeRhYBeXQZWgJ9COrAMyyOWDrTpyTDCLovm3jFpDhzqYKJlkGq9X6imUURZFVFJAkaQLzJugbBGlGgCUwln2J/f39KgwWOJWy04WWQ2fAXvAezm6wCFzIvB9c7Ovrq8u+RGzIAwk4068ryoJNWdh149ApnU4/zPkv/Mvo6OjgmQ4MDKR+Apt6owU5Oz7IAAAAAElFTkSuQmCC                                                                                                                                                             | wambrozewicz0 |      40
+       2 |          0 | http://rediff.com/pede.jsp?cras=magna&non=at&velit=nunc&nec=commodo&nisi=placerat&vulputate=praesent&nonummy=blandit&maecenas=nam&tincidunt=nulla&lacus=integer&at=pede&velit=justo&vivamus=lacinia&vel=eget&nulla=tincidunt&eget=eget&eros=tempus&elementum=vel&pellentesque=pede&quisque=morbi&porta=porttitor&volutpat=lorem&erat=id&quisque=ligula&erat=suspendisse&eros=ornare&viverra=consequat&eget=lectus&congue=in&eget=est&semper=risus&rutrum=auctor&nulla=sed&nunc=tristique&purus=in&phasellus=tempus&in=sit&felis=amet&donec=sem&semper=fusce&sapien=consequat&a=nulla&libero=nisl&nam=nunc&dui=nisl&proin=duis&leo=bibendum&odio=felis&porttitor=sed&id=interdum&consequat=venenatis&in=turpis&consequat=enim&ut=blandit&nulla=mi&sed=in&accumsan=porttitor&felis=pede&ut=justo&at=eu                                                                                                                                                                                                                                                                                                                                                                                                                                                          | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAK/SURBVDjLY/j//z8DJRiFozbrLk/aqkc76/a8eDft2Ou/Ew69+lm/8/n7pMUPTsuXXlAgaAAIK/fe9Kg7/ubmsaff/h99/O2/48y7q+Tyz2vKZJ5hJGiAUucNRv0JNycuuvLho/WU24tytz67aNl5fZFM8mlhoryg0HAlcePNz7+06670y2aftaja8fy224SbW6SzL1lrNt+aY95776BJ593dJq13dpu13jqoWXptGUJz1WXVkp0vrs48/e6NTNoZM+n4kzpTDr5+7T/l9gHpzAvOyhU3J/vMe/w5e+OL/5lrXvzXKb2xTjz2QhncAKOWqzM3X//0Z97Jdx8mHHj1YsbB128P3Pz0P3bW3TNiXgfk9BturQ+Y9+ifU+/du4nLnvyXiD7fLBZ+lo0BGEAswACKXXLm3We/aXf2SoYejZQIPBws7ncwb+qeF29TZt+9LJlwNiNmydP/tm13LwNtdY+Y+/i/TNT5XnAYAANIL3vN40uTDrx6JRF0xBDmIlHPvepJM+5czJh174Hb5Pvv3SbceykWdd4aaGtQ5MyH/1UTLywDG9Cx8/n3aQdf/W/e+uxL8ozb20CCIu57jIN7bpxcdujN/+hJ9/4nLnnyXyzibC1YLuS0d/jU+/+1ky9swZoOkDHQuTHR8x//T1705H/MnIf/ffvu/Q+ffO9/ytyH/7XiLmwR9DoijFtz9Hkz6/qbl716736Tizo/XSTgZIGw34kc9ajz65JnPvivF3/+oIDbYQ2cBmhmX1qTMO/Rf7Hgk83C/ie4YOKCnkeCXSpvfNCLPn+A3+WgEoZGYCAZi4aeKXZvu/PBo+3OV6CtwUI+x1nBmj2OKAJtbXCrvPbVNufSYz6nA/EYBrh33v3k23f3v2/Pnf8+HXf+G6VdPAa0lRMkZ5Zy8aJXzY1/QPzfq/rGf/fyaz8ZKM3OABiskbcwY1E6AAAAAElFTkSuQmCC                                                         | kjanko1       |      41
+       3 |          0 | https://godaddy.com/nisl/venenatis/lacinia/aenean.jpg?sed=sed&ante=sagittis&vivamus=nam&tortor=congue&duis=risus&mattis=semper&egestas=porta&metus=volutpat&aenean=quam&fermentum=pede&donec=lobortis&ut=ligula&mauris=sit&eget=amet&massa=eleifend&tempor=pede&convallis=libero&nulla=quis&neque=orci&libero=nullam&convallis=molestie&eget=nibh&eleifend=in&luctus=lectus&ultricies=pellentesque&eu=at&nibh=nulla&quisque=suspendisse&id=potenti&justo=cras&sit=in&amet=purus&sapien=eu&dignissim=magna&vestibulum=vulputate&vestibulum=luctus&ante=cum&ipsum=sociis&primis=natoque&in=penatibus&faucibus=et&orci=magnis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHXSURBVBgZpcE/S5VhGMfx7+8+T2VI0SDVKvYSrKE/0FsIwgZpCFqiISSiIcoigkIosWyrOR16AU2NETSGZUQoiNYgBJ1znufcz3VdeUvOIX4+igj2QhemFq6fPT/+ZLMXwxGAO+GOuREeeDhhhkcQZpg7h/fn7tLS2u23Tyfmq/Ez43P7hobTsSF2Y7jbszlgvurlSL3NP+xWP0diSxUWPJo8wW5dfbxCUUU4xaA1AggPzMEJ3ANzx9rA2sDCGVgwevwQ5kZREUGhJBRBJBEK5CIlISUkQ52g44mqDQpvjaIyN4oEhASCToAL3INOQFKHSmAKLDmFm1NU4cE2CSJIQEggkCAscMHsp4d4G9w4eY/C3SiSu7FDEkgUCUgSqhIzH+7SH3TpNr+ZfjdF4e4Uqc2ZbRKSKCSBhHnL/fc3yblhbGSM0aNj1LnLlVeT5NxQpDCn6AACJCFAwPOPM/zcXKeuG+p2QN02HNh/kNWNFX6lBYrk7uwQkIAk0ZG4dfoOry++YXn1G02uaXLN8vdlZi+/ZCRfoqjWfqwsXnuWJ9wMN8fMcHcsZ9wdj6B/pKbfNmTLbKxvMD37hS2LbFFE8D/nHpyKpsnkOjMYZD6/+Cr+UUSwF38B/pkb32XiUiUAAAAASUVORK5CYII=                                                                                                                                                                                                                                                                                                                                                                             | hmckeighan2   |      42
+       4 |          0 | https://yolasite.com/luctus/ultricies/eu/nibh/quisque.aspx?suspendisse=justo&accumsan=aliquam&tortor=quis&quis=turpis&turpis=eget&sed=elit&ante=sodales&vivamus=scelerisque&tortor=mauris&duis=sit&mattis=amet&egestas=eros&metus=suspendisse&aenean=accumsan&fermentum=tortor&donec=quis&ut=turpis&mauris=sed&eget=ante&massa=vivamus&tempor=tortor&convallis=duis&nulla=mattis&neque=egestas&libero=metus&convallis=aenean&eget=fermentum&eleifend=donec&luctus=ut&ultricies=mauris&eu=eget&nibh=massa&quisque=tempor&id=convallis&justo=nulla&sit=neque&amet=libero&sapien=convallis&dignissim=eget&vestibulum=eleifend&vestibulum=luctus&ante=ultricies&ipsum=eu&primis=nibh&in=quisque                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHMSURBVDjLpZNNS1VRGIWf67HQ8MZVEtLserNIsk8JA0f1F8JZ/oRG9RNs3ESaNQscFQ5KCoIiopGhhFDgHZRgZEIRSN3PvddqcI5memZu2Ow1WQ/Pu+Et2OYgp4MDns7tcH9hY0dFNgZiBAyWkCEqzVFw71a58B8AYLD3MMZYYMAyMngXRILPm7X9BtHGzgoC29iZTQaSjGRiO2eEGFNFbKSsuJ31P6Qdtf8THZXSBVFC0Sk0iv7CCtcOPSDxFlEmhBxAEFlJmU2aC7HBaZ4zXBmn4tcoGgXvBygoK21D0nzSbxgsT3B0YJyB8I6euEbIA4TAv6JMiKJbGwyFVxSPlYhbTxm6NM1IWEBq5wBizMrp/I6i3HrB4NhNaCyz+GiOnlKdvvoSw8lKnkGqrAAxmlL7E2f6GhR7a6j5BSzi7/ecunGXiWSexdnJ4h6DTF1GsU2l9phS+QqqrWDVuTo1ilrf6Oqqcu7ydUKzdWePgVhdr7G6/ofk+0sqI+c5UvyBw08oJCzNVwGhRpX+s8PEZvv225kLY4W8bVycnfx6cXruRNKxhsOvdCF2TZ10j7L58QPVZzNPOvM2LDRbXcsPp+qWsbTreudFwvbxvyYHcoBEg0hXAAAAAElFTkSuQmCC                                                                                                                                                                                                                                                                                                                                                                                             | dnarracott3   |      43
+       5 |          0 | http://example.com/amet/turpis.jpg?volutpat=molestie&quam=hendrerit&pede=at&lobortis=vulputate&ligula=vitae&sit=nisl&amet=aenean&eleifend=lectus&pede=pellentesque&libero=eget&quis=nunc&orci=donec&nullam=quis&molestie=orci&nibh=eget&in=orci&lectus=vehicula&pellentesque=condimentum&at=curabitur&nulla=in&suspendisse=libero&potenti=ut&cras=massa&in=volutpat&purus=convallis&eu=morbi&magna=odio&vulputate=odio&luctus=elementum&cum=eu&sociis=interdum&natoque=eu&penatibus=tincidunt&et=in&magnis=leo&dis=maecenas&parturient=pulvinar&montes=lobortis&nascetur=est&ridiculus=phasellus&mus=sit&vivamus=amet&vestibulum=erat&sagittis=nulla&sapien=tempus&cum=vivamus&sociis=in&natoque=felis&penatibus=eu&et=sapien&magnis=cursus&dis=vestibulum&parturient=proin&montes=eu&nascetur=mi&ridiculus=nulla&mus=ac&etiam=enim&vel=in&augue=tempor&vestibulum=turpis&rutrum=nec&rutrum=euismod&neque=scelerisque&aenean=quam&auctor=turpis&gravida=adipiscing&sem=lorem&praesent=vitae&id=mattis&massa=nibh&id=ligula&nisl=nec                                                                                                                                                                                                                           | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJlSURBVDjLpZNNSJRhEMd/z7u6666b6VaQFoohgYpYFHoKo2+SDnbo4smOHQUvfVy6CoHHTkUQHYLCgyAEK32AUUSHCqKMxYIs3ErXV3ff93memQ7FJhkdak7DMPPjz8z8jaryP1Hze8HNmKwqoyqcEKFPFVR4IsK0Clc2ndJwfb9Zr8DNmAEVrpnWsXbT2Icmc6AeLRfx354TvR0viDDSNKT3NwBc3gxp48CdYPswmtmMX3uNRF9QVwFTR1DXgbEB0fvbRJ/vn952Ru9WATZvcqrMJ3puZSUo4SsFsCuIi1Bf+QERxaRaSaR6WJ49G4rQ1jysXwMAFUaDtgtZTYJEBXCr5CeLIDH4mAf3QGyIK73AR+/IdF7IimcUIAAQYdA09SOVAurKqFgOnkyjYlFvOTAQohKhNsQtPaOmcTfiGVwP6CLVgLil6pCKRV2M+vhnblEfI1ERiPCe9uoZVSirqyTxDnxMuFzixdM5St9CEEd9xtDd3UAm5VECUEWExC8FngK2DCQJl1eYzb+iZUeWw8d3cehYG80taR4/WiBcKWOCDOJrsBFzVQUiTNni8z1BYyvp2rf0D3RSX1tGfAX1ETtbkuSae0n7j9Q09FIuzmNjptYrmFh7dTnEbSKR7SSbBpUIfFzdR9p/JFHfgaZ6WXh4ObQRE1VA02ldFGFkbe4G6A4SDf2YRA4VBVGC5FZqtx1BM4f48nISGzOy97wubnjlhZvmqHiu1neNtSe3dBPUBiAOF3lWF97waXa84Czn9l3U6T96AeDDdZMVz5gIJ7ynz8XgLE+cZdpZxvdf+ouZ/iW+AxEldjf3XZxpAAAAAElFTkSuQmCC                                                                                                                                                                                 | bworboy4      |      44
+       6 |          0 | http://bbb.org/semper.aspx?bibendum=odio&felis=in&sed=hac&interdum=habitasse&venenatis=platea&turpis=dictumst&enim=maecenas&blandit=ut&mi=massa&in=quis&porttitor=augue&pede=luctus&justo=tincidunt&eu=nulla&massa=mollis&donec=molestie&dapibus=lorem&duis=quisque&at=ut&velit=erat&eu=curabitur&est=gravida&congue=nisi&elementum=at&in=nibh&hac=in&habitasse=hac&platea=habitasse&dictumst=platea&morbi=dictumst&vestibulum=aliquam&velit=augue&id=quam&pretium=sollicitudin&iaculis=vitae&diam=consectetuer&erat=eget&fermentum=rutrum&justo=at&nec=lorem&condimentum=integer&neque=tincidunt&sapien=ante&placerat=vel&ante=ipsum&nulla=praesent&justo=blandit&aliquam=lacinia&quis=erat&turpis=vestibulum&eget=sed&elit=magna&sodales=at&scelerisque=nunc&mauris=commodo&sit=placerat&amet=praesent&eros=blandit&suspendisse=nam&accumsan=nulla&tortor=integer&quis=pede                                                                                                                                                                                                                                                                                                                                                                                 | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGMSURBVDjLY/j//z8DJZiggtx9Sasyd8Yxk21Axo7YSymbow4QZUDJ8QyHoiNpB/IPJP/P3pPwP3177P+mQ5X/6/aV/o9cFrATrwHFxzIcCg+nnplzacr/TbdW/19/c8X/tTeW/l91bdH/5Vfn/y/ZkvPfb7rbHZwGFBxKnTn9fN//jTdX/W8+XPU/cX34/5iVQf8rtuf/L9mc/d9nqutuvC7I2Zv4AOjf/0D//o9fG3YIJh4wy+OS9xTnQ2699kyO7VacRAUi0L/wUPea5LTGtceW9FgA+ncNyekgfJEfZ9AcTyagfw+59ztcgolbVBsdMi7V/a+Xr/lfK0v1AV4XAP27O2tl0v/UJbH/rRtM/5tVGf6PmB74v/dE0//khdH/VVMUZ+I0AOjflxnLE/5PP9v7f8rprv8TT7X/7zvZ8r/nRON/kLhKssIZxXhZB7wusGu22Bk3N+x/1Mzg//qFWv+1s9X+q6cp/1dOUjigEIeqGWcgAv17AOjfS2RnJt08DWbNTNVVVMmNhDAANau2t3wToKQAAAAASUVORK5CYII=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | sgreenleaf5   |      45
+       7 |          0 | https://dropbox.com/nibh.html?duis=aliquet&ac=pulvinar&nibh=sed&fusce=nisl&lacus=nunc&purus=rhoncus&aliquet=dui&at=vel&feugiat=sem&non=sed&pretium=sagittis&quis=nam&lectus=congue&suspendisse=risus&potenti=semper&in=porta&eleifend=volutpat&quam=quam&a=pede&odio=lobortis&in=ligula&hac=sit&habitasse=amet&platea=eleifend                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKjSURBVDjLjZJbSNNhGMZXF912FZEVpOaVFFSCmhe2/iNqhYVsmo1tDXUiJjNnrC0RMxVFxTm3ecJDeSrblorpSFAJzxptOrfFzJnuUJDplG2ZrqchtaSGePFcffx+vN/zviQApL2STQvgzFaFOCytx7HQFLjVyAuqjwkPOvTnfU+YRz1BmJsDPda2Y9idmrRg8b4E9ewjEqsqDDZ1MlzjZbApo2BtPwldVfDqvgRy2uEyu0YNx4gcW5qn2BiVw/K+F4NPzpn3JYilxnH1LZk/17UKeAwqOHWdsA9JkMe6pPQr4JJDODLOZYeESYb8LrGVGn9mWiJI+2FX8rHc9RiWrmQYW2/D1FUATf0VaGWhLB/MjjpNyDgUj5hBxu40lPNQWZOPF01M2AcEWJvpATasWJ1RYLT06hefoDz+/HBt6i2ochOhb8tGK58OCZNAdQoFr8dY+DqXg83lbu8XSuCaVWF7cRiahuRtn0AaH/zSNNj+X2Hqkkis6LLhcQ3D9fEeVibTYWhOxGQdEyZZzN6FWfoz8W1WCI97DM55NtxLDKzrRZiroyCjPA62uht/BQcvVAilwnRfYYZnDNinBL9hFtyf7sChewS9nACn8KLtATc3d6ExgbEDH4h6nhTLf7cx9Bko7FBCLBNC15flHfst3OZEfF9iYs07iUlGuIylEad2b44USK2m03k9zm6DB/l6QNTSjrleEbR9Ylgm6HCaGVjRPIRWTHEZyyKC/r0V0kx+2Pa0ohL8V3aw1UBHMQGsL8JYS8OAKAAj1dcwUEDGvJQKf8dGMldE2xQF95GQMw7uGyCPexabY1JsTlRgwgu2cUNQnCXYKcyv4ENzSmRvXqwonN7SGZYxBVr0URSyQ9FfdB0NRUmIuFm1XJmVtFOYP8EvH33H/9EvkWcAAAAASUVORK5CYII=                                                                                             | dtolotti6     |      46
+       8 |          0 | http://surveymonkey.com/eleifend/quam/a.aspx?pellentesque=in&viverra=tempor&pede=turpis&ac=nec&diam=euismod&cras=scelerisque&pellentesque=quam&volutpat=turpis&dui=adipiscing&maecenas=lorem&tristique=vitae&est=mattis&et=nibh&tempus=ligula&semper=nec&est=sem&quam=duis&pharetra=aliquam&magna=convallis&ac=nunc&consequat=proin&metus=at&sapien=turpis&ut=a&nunc=pede&vestibulum=posuere&ante=nonummy&ipsum=integer&primis=non&in=velit&faucibus=donec&orci=diam&luctus=neque&et=vestibulum&ultrices=eget&posuere=vulputate&cubilia=ut&curae=ultrices&mauris=vel&viverra=augue&diam=vestibulum&vitae=ante&quam=ipsum&suspendisse=primis&potenti=in&nullam=faucibus&porttitor=orci&lacus=luctus&at=et&turpis=ultrices&donec=posuere&posuere=cubilia&metus=curae&vitae=donec&ipsum=pharetra&aliquam=magna&non=vestibulum&mauris=aliquet&morbi=ultrices&non=erat&lectus=tortor&aliquam=sollicitudin&sit=mi&amet=sit&diam=amet&in=lobortis&magna=sapien&bibendum=sapien&imperdiet=non&nullam=mi&orci=integer&pede=ac&venenatis=neque&non=duis&sodales=bibendum&sed=morbi&tincidunt=non&eu=quam&felis=nec&fusce=dui&posuere=luctus&felis=rutrum&sed=nulla&lacus=tellus&morbi=in&sem=sagittis&mauris=dui                                                        | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHVSURBVDjLjZPLaiJBFIZNHmJWCeQdMuT1Mi/gYlARBRUkao+abHUhmhgU0QHtARVxJ0bxhvfGa07Of5Iu21yYFPyLrqrz1f+f6rIRkQ3icca6ZF39RxesU1VnAVyuVqvJdrvd73Y7+ky8Tk6n87cVYgVcoXixWNByuVSaTqc0Ho+p1+sJpNvtksvlUhCb3W7/cf/w+BSLxfapVIqSySRlMhnSdZ2GwyHN53OaTCbU7/cFYBgG4RCPx/MKub27+1ur1Xqj0YjW6zWxCyloNBqUSCSkYDab0WAw+BBJeqLFtQpvGoFqAlAEaZomuc0ocAQnnU7nALiJ3uh8whgnttttarVaVCgUpCAUCgnQhMAJ+gG3CsDZa7xh1mw2ZbFSqYgwgsGgbDQhcIWeAHSIoP1pcGeNarUqgFKpJMLw+/0q72azkYhmPAWIRmM6AGbXc7kc5fN5AXi9XgWACwAguLEAojrfsVGv1yV/sVikcrksAIfDIYUQHEAoPgLwT3GdzWYNdBfXh3xwApDP5zsqtkoBwuHwaSAQ+OV2u//F43GKRCLEc5ROpwVoOngvBXj7jU/wwZPPX72DT7RXgDfIT27QEgvfKea9c3m9FsA5IN94zqbw9M9fAEuW+zzj8uLvAAAAAElFTkSuQmCC                                                                                                                                                                                                                                                                                                                                                                                 | omcmenamy7    |      47
+       9 |          0 | http://chicagotribune.com/magna/vulputate/luctus/cum/sociis/natoque.png?quam=amet&nec=cursus&dui=id&luctus=turpis&rutrum=integer&nulla=aliquet&tellus=massa&in=id&sagittis=lobortis&dui=convallis&vel=tortor&nisl=risus&duis=dapibus&ac=augue&nibh=vel&fusce=accumsan&lacus=tellus&purus=nisi&aliquet=eu&at=orci&feugiat=mauris&non=lacinia&pretium=sapien&quis=quis&lectus=libero&suspendisse=nullam&potenti=sit&in=amet&eleifend=turpis&quam=elementum&a=ligula&odio=vehicula&in=consequat&hac=morbi&habitasse=a&platea=ipsum&dictumst=integer&maecenas=a&ut=nibh&massa=in&quis=quis&augue=justo&luctus=maecenas&tincidunt=rhoncus&nulla=aliquam&mollis=lacus&molestie=morbi&lorem=quis&quisque=tortor&ut=id&erat=nulla&curabitur=ultrices&gravida=aliquet&nisi=maecenas&at=leo&nibh=odio&in=condimentum&hac=id&habitasse=luctus&platea=nec&dictumst=molestie&aliquam=sed&augue=justo&quam=pellentesque&sollicitudin=viverra&vitae=pede&consectetuer=ac&eget=diam&rutrum=cras&at=pellentesque&lorem=volutpat&integer=dui&tincidunt=maecenas&ante=tristique&vel=est&ipsum=et&praesent=tempus&blandit=semper&lacinia=est&erat=quam&vestibulum=pharetra&sed=magna&magna=ac&at=consequat&nunc=metus&commodo=sapien&placerat=ut&praesent=nunc&blandit=vestibulum | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHISURBVDjLpZM/a5NRFIefxCJYSsFQsGjNEBGsVXEQFEQHxQr6BaSLX8DR2cWSSUe/haOroKUVFC24CDVoMcUUrRFikubtfe/5HYe8+VOSodC73B+Xcx6ecy835+4cZuU55JroheevtvsqcscBM8DBJeRg6mYTPF0q5vYBAE4eP4rjuMABlyMHH4JI8P3X7qiBueOeNQjcHffMJgNJjuRYOmYEs64i7khZYy9rPyQ1jQLc1C10kISLrEH9xh4wxjGAKJA5yoq6xb0sNhpLJGmTc9MvUfTRZ1QUJsfMMVO2ZzlCEgNzM/N82LlPGpMxBhHM1J+/0niAlBIUCTFyqnCW+dmrNJM2nzt3uflsb2rl8d/WAGCG2UR26xAVuLPwEHNhMoRTa2xxce46rdDhU/Vt49JyvjBk0FX2zCCJAXPxo14hVSQqJbWUf3tNLp++QSvdzb/fXK0PGTimwbMlMSFa5MR0kSjDXGw3qhSmZlnfWmPt2+pOiCzmep/p0YuKmwY3Xz92jyQEggJJDJyZOc+10iIfq+9YqazTTv8s1Mr+JXfQ33hhOd++Urw1+ebr659B3K6VfQPgwIDSk1zbdGSyIyv9Lvtm7/w/ZAmOh9Ycu/MAAAAASUVORK5CYII=                                                                                                                                                                                                                                                                                                                                                                                                 | aleyden8      |      48
+      10 |          0 | https://histats.com/vestibulum/ante/ipsum/primis.js?amet=habitasse&eros=platea&suspendisse=dictumst&accumsan=morbi&tortor=vestibulum&quis=velit&turpis=id&sed=pretium&ante=iaculis&vivamus=diam&tortor=erat&duis=fermentum&mattis=justo&egestas=nec&metus=condimentum&aenean=neque&fermentum=sapien&donec=placerat&ut=ante&mauris=nulla&eget=justo&massa=aliquam&tempor=quis&convallis=turpis&nulla=eget&neque=elit&libero=sodales&convallis=scelerisque&eget=mauris&eleifend=sit&luctus=amet&ultricies=eros&eu=suspendisse&nibh=accumsan&quisque=tortor&id=quis&justo=turpis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALnSURBVBgZBcFdaNQFAADw3//jbred7pY6NLe2FKGgKOthtiJMyiiEgnoMwacIglKih3r1OSh68MFe+hCjsqgXU9N6WJFJBZU5I8/5kbqYzbvtbnf/z36/oCxLsOfIlSm8vXmkNt1NC920kBaFlaxoYQkLyLGIm/gQx2OAIsu23b9h1fRr20cBQCcpGt2kaCz28vEkZamfm1tYdvRCZyf2xgBFlq0frgbgyq1cJQjEAVHMQCU0MRCKwlAl4oHxQRsb9TUHf7r2VgiQp+lwPSYrWEoCrZRbfVo9Wj1urvDvcg7eOHTZ9Ka6e9dVRmOAPE3XrK6GOn06vVwYBmJEEWFEJBAFFAjyth+bi3653LoWA+RJsr4xGGmtZLr9UhiWopAwD0QhkVIUoYzMt/veOfF3G3tigCxJJtcPV7R6pQxKojwQlsiJytxw84D5c01bq5Nm+tObvtz3yH8hQJ70Jzc0BnSSUhASBYEQIQIMzh22sXHJ6Lbdnt/8u1dWXt8BMTy1/+vBOAqrA5VQkudCJUolcoGhq1+4o/Kdxl07dS4d1Ri506aJ9gdHX91cjSHrJ6P1ek0YUEBJEBAKlCX1pV81Ht4l755VWzeul191+/atQ1ln8UAMedIfiutVcUgUBvIioCwVCAL68Zh0cU4YLQjCjurwAr2u5ev9KH5076F12D9194Qb7dLcfK5eo1YNDa/8acP8e6q1VJH1hMUtwtXKNDH78fne2fPtF+M8SR7Hrp/PXbS4Elvul9K8tCWbMVU5aezJHcrkuCBf8uexvnK5q0h6K81me/fuwxePxHmaPvjsY/cNvvnCQwDg+jfvWnPP05KFA+K44Y9vM72Jl5ztTfj02OmDJ9/fdwTiPE0v3lho+ejEOSOrBo0M14zUB4yIBNE/ooFRs6e68i0v2zL1jFOf/6CVVZsAcZFln82cmR2fOTM7ibVYi9ueG2uNPdFsDrUXE5/MbbVwoWvk9Fd+O3/lL3wP8D9kTlQPa94WnAAAAABJRU5ErkJggg== | hcheel9       |      49
+(10 rows)
+
+SELECT * FROM commentt LIMIT 10;
+ commentt_id | usert_handle  | post_id 
+-------------+---------------+---------
+          81 | wambrozewicz0 |       1
+          82 | kjanko1       |       2
+          83 | hmckeighan2   |       3
+          84 | dnarracott3   |       4
+          85 | bworboy4      |       5
+          86 | sgreenleaf5   |       6
+          87 | dtolotti6     |       7
+          88 | omcmenamy7    |       8
+          89 | aleyden8      |       9
+          90 | hcheel9       |      10
+(10 rows)
+
+SELECT * FROM eventt LIMIT 10;
+ eventt_id |    handle    | wall_id |    creation_time    |     start_time      |      end_time       |                       title                       |               description                |         location          
+-----------+--------------+---------+---------------------+---------------------+---------------------+---------------------------------------------------+------------------------------------------+---------------------------
+         1 | eboughtons   |     252 | 2017-09-27 03:37:28 | 2018-06-04 18:00:30 | 2018-09-17 15:43:47 | Superhero Movie                                   | strategize mission-critical web services | 6523 Sloan Way
+         2 | nlevingst    |     253 | 2017-11-09 20:26:16 | 2018-10-29 19:04:55 | 2018-09-15 05:02:15 | Soul Men                                          | morph best-of-breed content              | 916 Burning Wood Crossing
+         3 | bmerrileesu  |     254 | 2017-03-26 14:31:34 | 2018-09-11 13:39:11 | 2018-07-24 06:02:05 | The Shadow of the Eagle                           | embrace vertical e-business              | 720 Shoshone Junction
+         4 | bmelbyv      |     255 | 2017-05-12 15:39:37 | 2018-10-29 02:05:10 | 2018-03-20 07:27:25 | Trouble at Timpetill (Enfants de Timpelbach, Les) | integrate enterprise niches              | 415 Dahle Drive
+         5 | vskynerw     |     256 | 2017-04-03 09:12:36 | 2018-09-19 04:05:37 | 2018-12-15 04:42:16 | Falls, The                                        | engineer one-to-one initiatives          | 9 Dapin Pass
+         6 | bdillestonex |     257 | 2017-11-29 14:15:04 | 2018-04-07 11:14:57 | 2018-10-10 08:26:57 | 10.000 Km (Long Distance)                         | enhance dynamic models                   | 0 Transport Street
+         7 | tvasilechkoy |     258 | 2017-05-11 12:35:10 | 2018-04-05 00:19:27 | 2019-01-26 01:29:30 | Truman Show, The                                  | deploy frictionless infrastructures      | 39755 Loeprich Parkway
+         8 | mbrittonz    |     259 | 2017-05-05 04:39:13 | 2018-03-27 18:10:40 | 2018-10-17 10:24:19 | Invasion of the Body Snatchers                    | transform open-source architectures      | 3 Vernon Point
+         9 | csiebert10   |     260 | 2017-08-03 15:46:17 | 2018-03-07 10:00:38 | 2018-07-11 14:45:38 | Blank Generation, The                             | deploy revolutionary systems             | 1369 Crowley Lane
+        10 | iskokoe11    |     261 | 2017-03-11 12:01:52 | 2018-05-16 11:59:18 | 2018-08-08 16:30:06 | Man with One Red Shoe, The                        | envisioneer e-business partnerships      | 0658 Butterfield Avenue
+(10 rows)
+
+SELECT * FROM notification LIMIT 10;
+ notif_id | read_status |            notif_link            |        notif_text         |     notif_time      | usert_handle  
+----------+-------------+----------------------------------+---------------------------+---------------------+---------------
+        1 | f           | c91feeb261545b0039980572e61d4708 | asherry0@hexun.com        | 2017-07-16 16:38:29 | wambrozewicz0
+        2 | t           | c351eab625bea121dda19fc38a2c9b2d | groseman1@nymag.com       | 2017-10-30 15:17:27 | kjanko1
+        3 | f           | 3cbe36024316e05222efcaa9205f1d9b | asynan2@squarespace.com   | 2017-10-24 16:29:57 | hmckeighan2
+        4 | f           | e29b338021e6035cc0501c5028a3b4af | jadne3@issuu.com          | 2017-04-30 08:04:55 | dnarracott3
+        5 | f           | e44fee0318cd21f0a68a62e67bfe1764 | ccesco4@last.fm           | 2017-09-03 22:17:00 | bworboy4
+        6 | t           | 1c5a40aaba06de3b1f8f80a6c9b6689e | lruddock5@dailymail.co.uk | 2017-11-29 08:26:47 | sgreenleaf5
+        7 | f           | 86e40a5444a39ba74a5824396f139ce7 | glandall6@earthlink.net   | 2017-12-01 22:31:59 | dtolotti6
+        8 | t           | 119d166274d44b04963c0acceb648e22 | abilson7@google.com.hk    | 2017-08-21 07:52:05 | omcmenamy7
+        9 | t           | 83c9436bad3eaa571f6d09af78c03b53 | wcrockley8@google.ca      | 2017-06-12 20:35:40 | aleyden8
+       10 | f           | e7afe450070225e286628a087a589cb0 | dhaines9@amazon.co.jp     | 2017-02-27 21:19:39 | hcheel9
+(10 rows)
+
+SELECT * FROM page_follower LIMIT 10;
+ usert_handle  | page_handle  
+---------------+--------------
+ wambrozewicz0 | dbeinke0
+ kjanko1       | owharlton1
+ hmckeighan2   | ggentry2
+ dnarracott3   | awinyard3
+ bworboy4      | kswanwick4
+ sgreenleaf5   | vweatherill5
+ dtolotti6     | dbecerro6
+ omcmenamy7    | ckolak7
+ aleyden8      | noxer8
+ hcheel9       | hfishenden9
+(10 rows)
+
+SELECT * FROM eventt_subscription LIMIT 10;
+ usert_handle  | eventt_id | rsvp_status 
+---------------+-----------+-------------
+ abaudichon13  |         1 | going
+ abaudichon13  |         2 | not going
+ abidewel18    |         3 | maybe
+ abidewel18    |         4 | maybe
+ abrierley37   |         5 | 
+ abrierley37   |         6 | 
+ abullente     |         7 | 
+ abullente     |         8 | not going
+ abullerwell3x |         9 | 
+ abullerwell3x |        10 | maybe
+(10 rows)
+
+SELECT * FROM submission_like LIMIT 10;
+ usert_handle  | submission_id 
+---------------+---------------
+ wambrozewicz0 |             1
+ kjanko1       |             2
+ hmckeighan2   |             3
+ dnarracott3   |             4
+ bworboy4      |             5
+ sgreenleaf5   |             6
+ dtolotti6     |             7
+ omcmenamy7    |             8
+ aleyden8      |             9
+ hcheel9       |            10
+(10 rows)
+
+SELECT * FROM feed_view LIMIT 10;
+ usert_handle  | post_id 
+---------------+---------
+ wambrozewicz0 |       1
+ kjanko1       |       2
+ hmckeighan2   |       3
+ dnarracott3   |       4
+ bworboy4      |       5
+ sgreenleaf5   |       6
+ dtolotti6     |       7
+ omcmenamy7    |       8
+ aleyden8      |       9
+ hcheel9       |      10
+(10 rows)
+
+SELECT * FROM usert_friend LIMIT 10;
+  usert_handle  | friend_handle 
+----------------+---------------
+ abaudichon13   | wminet1f
+ abidewel18     | wbradberry21
+ abullente      | wambrozewicz0
+ aleyden8       | vmccarlie1k
+ amacness1q     | tmacourek10
+ apack1u        | tkerman1n
+ apellantk      | tdurninn
+ bportchmouth1c | tbeever1h
+ bswoffer12     | srohan1i
+ bthornberm     | spretiousv
+(10 rows)
+

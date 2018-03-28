@@ -1,0 +1,373 @@
+COMP421 Project Deliverable #2 Part 2
+
+psql cs421 < sql/tables_dropall.sql
+
+DROP TABLE usert_friend, feed_view, submission_like, eventt_subscription, page_follower, notification, eventt, commentt, post, submission, page, usert, creator, wall CASCADE;
+NOTICE:  drop cascades to 2 other objects
+DETAIL:  drop cascades to view unread_notifications
+drop cascades to view eventt_average_ages
+DROP TABLE
+
+psql cs421 < sql/tables_create.sql
+
+CREATE TABLE wall(
+	wall_id SERIAL,
+	description VARCHAR(1023),
+	PRIMARY KEY(wall_id)
+);
+CREATE TABLE
+CREATE TABLE creator(
+	handle VARCHAR(255),
+	wall_id INTEGER UNIQUE NOT NULL,
+	PRIMARY KEY (handle),
+	FOREIGN KEY (wall_id) REFERENCES wall
+);
+CREATE TABLE
+CREATE TABLE usert(
+	usert_handle VARCHAR(255), 
+	display_name VARCHAR(255), 
+	email VARCHAR(255) UNIQUE, 
+	firstname VARCHAR(255), 
+	lastname VARCHAR(255), 
+	gender VARCHAR(255), 
+	birth_date TIMESTAMP,
+	PRIMARY KEY (usert_handle),
+	FOREIGN KEY (usert_handle) REFERENCES creator(handle)
+);
+CREATE TABLE
+CREATE TABLE page(
+	page_handle VARCHAR(255),
+	description VARCHAR(1023),
+	title VARCHAR(255),
+	follower_count INTEGER NOT NULL DEFAULT 0,
+	usert_handle VARCHAR(255) NOT NULL,
+	PRIMARY KEY (page_handle),
+	FOREIGN KEY (page_handle) REFERENCES creator(handle),
+	FOREIGN KEY (usert_handle) REFERENCES usert
+);
+CREATE TABLE
+CREATE TABLE submission(
+	submission_id SERIAL,
+	text_content VARCHAR(8000),
+	like_count INTEGER NOT NULL DEFAULT 0,
+	creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (submission_id)
+);
+CREATE TABLE
+CREATE TABLE post(
+	post_id INTEGER,
+	view_count INTEGER NOT NULL DEFAULT 0,
+	attachment_link VARCHAR(2083),
+	image VARCHAR(2083),
+	handle VARCHAR(255) NOT NULL,
+	wall_id INTEGER NOT NULL,
+	PRIMARY KEY(post_id),
+	FOREIGN KEY(post_id) REFERENCES submission(submission_id),
+	FOREIGN KEY(handle) REFERENCES creator,
+	FOREIGN KEY(wall_id) REFERENCES wall
+);
+CREATE TABLE
+CREATE TABLE commentt(
+	commentt_id INTEGER,
+	usert_handle VARCHAR(255) NOT NULL,
+	post_id INTEGER NOT NULL,
+	PRIMARY KEY (commentt_id),
+	FOREIGN KEY (commentt_id) REFERENCES submission(submission_id),
+	FOREIGN KEY (usert_handle) REFERENCES usert,
+	FOREIGN KEY (post_id) REFERENCES post
+);
+CREATE TABLE
+CREATE TABLE eventt(
+	eventt_id SERIAL,
+	handle VARCHAR(255) NOT NULL,
+	wall_id INTEGER UNIQUE NOT NULL,
+	creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	start_time TIMESTAMP NOT NULL,
+	end_time TIMESTAMP NOT NULL,
+	title VARCHAR(255) NOT NULL,
+	description VARCHAR(1023),
+	location VARCHAR(255),
+	PRIMARY KEY(eventt_id),
+	FOREIGN KEY(handle) REFERENCES creator,
+	FOREIGN KEY(wall_id) REFERENCES wall
+);
+CREATE TABLE
+CREATE TABLE notification(
+	notif_id SERIAL,
+	read_status BOOLEAN,
+	notif_link VARCHAR(2083),
+	notif_text VARCHAR(1023), 
+	notif_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+	usert_handle VARCHAR(255) NOT NULL,
+	PRIMARY KEY (notif_id),
+	FOREIGN KEY (usert_handle) REFERENCES usert
+);
+CREATE TABLE
+CREATE TABLE page_follower(
+	usert_handle VARCHAR(255),
+	page_handle VARCHAR(255),
+	PRIMARY KEY(usert_handle, page_handle),
+	FOREIGN KEY(usert_handle) REFERENCES usert,
+	FOREIGN KEY(page_handle) REFERENCES page
+);
+CREATE TABLE
+CREATE TABLE eventt_subscription(
+	usert_handle VARCHAR(255),
+	eventt_id INTEGER,
+	rsvp_status VARCHAR(255),
+	PRIMARY KEY(usert_handle, eventt_id),
+	FOREIGN KEY(usert_handle) REFERENCES usert,
+	FOREIGN KEY(eventt_id) REFERENCES eventt
+);
+CREATE TABLE
+CREATE TABLE submission_like(
+	usert_handle VARCHAR(255),
+	submission_id INTEGER,
+	PRIMARY KEY(usert_handle, submission_id),
+	FOREIGN KEY(usert_handle) REFERENCES usert,
+	FOREIGN KEY(submission_id) REFERENCES submission
+);
+CREATE TABLE
+CREATE TABLE feed_view(
+	usert_handle VARCHAR(255),
+	post_id INTEGER,
+	PRIMARY KEY(usert_handle, post_id),
+	FOREIGN KEY(usert_handle) REFERENCES usert,
+	FOREIGN KEY(post_id) REFERENCES post
+);
+CREATE TABLE
+CREATE TABLE usert_friend(
+	usert_handle VARCHAR(255),
+	friend_handle VARCHAR(255),
+	PRIMARY KEY(usert_handle, friend_handle),
+	FOREIGN KEY(usert_handle) REFERENCES usert,
+	FOREIGN KEY(friend_handle) REFERENCES usert(usert_handle),
+	CHECK (usert_handle <> friend_handle)
+);
+CREATE TABLE
+
+psql cs421 < sql/tables_print_desc.sql
+
+\d wall
+                                     Table "cs421g16.wall"
+   Column    |          Type           |                       Modifiers                        
+-------------+-------------------------+--------------------------------------------------------
+ wall_id     | integer                 | not null default nextval('wall_wall_id_seq'::regclass)
+ description | character varying(1023) | 
+Indexes:
+    "wall_pkey" PRIMARY KEY, btree (wall_id)
+Referenced by:
+    TABLE "creator" CONSTRAINT "creator_wall_id_fkey" FOREIGN KEY (wall_id) REFERENCES wall(wall_id)
+    TABLE "eventt" CONSTRAINT "eventt_wall_id_fkey" FOREIGN KEY (wall_id) REFERENCES wall(wall_id)
+    TABLE "post" CONSTRAINT "post_wall_id_fkey" FOREIGN KEY (wall_id) REFERENCES wall(wall_id)
+
+\d creator
+           Table "cs421g16.creator"
+ Column  |          Type          | Modifiers 
+---------+------------------------+-----------
+ handle  | character varying(255) | not null
+ wall_id | integer                | not null
+Indexes:
+    "creator_pkey" PRIMARY KEY, btree (handle)
+    "creator_wall_id_key" UNIQUE CONSTRAINT, btree (wall_id)
+Foreign-key constraints:
+    "creator_wall_id_fkey" FOREIGN KEY (wall_id) REFERENCES wall(wall_id)
+Referenced by:
+    TABLE "eventt" CONSTRAINT "eventt_handle_fkey" FOREIGN KEY (handle) REFERENCES creator(handle)
+    TABLE "page" CONSTRAINT "page_page_handle_fkey" FOREIGN KEY (page_handle) REFERENCES creator(handle)
+    TABLE "post" CONSTRAINT "post_handle_fkey" FOREIGN KEY (handle) REFERENCES creator(handle)
+    TABLE "usert" CONSTRAINT "usert_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES creator(handle)
+
+\d usert
+                 Table "cs421g16.usert"
+    Column    |            Type             | Modifiers 
+--------------+-----------------------------+-----------
+ usert_handle | character varying(255)      | not null
+ display_name | character varying(255)      | 
+ email        | character varying(255)      | 
+ firstname    | character varying(255)      | 
+ lastname     | character varying(255)      | 
+ gender       | character varying(255)      | 
+ birth_date   | timestamp without time zone | 
+Indexes:
+    "usert_pkey" PRIMARY KEY, btree (usert_handle)
+    "usert_email_key" UNIQUE CONSTRAINT, btree (email)
+Foreign-key constraints:
+    "usert_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES creator(handle)
+Referenced by:
+    TABLE "commentt" CONSTRAINT "commentt_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "eventt_subscription" CONSTRAINT "eventt_subscription_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "feed_view" CONSTRAINT "feed_view_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "notification" CONSTRAINT "notification_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "page_follower" CONSTRAINT "page_follower_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "page" CONSTRAINT "page_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "submission_like" CONSTRAINT "submission_like_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+    TABLE "usert_friend" CONSTRAINT "usert_friend_friend_handle_fkey" FOREIGN KEY (friend_handle) REFERENCES usert(usert_handle)
+    TABLE "usert_friend" CONSTRAINT "usert_friend_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+
+\d page
+                     Table "cs421g16.page"
+     Column     |          Type           |     Modifiers      
+----------------+-------------------------+--------------------
+ page_handle    | character varying(255)  | not null
+ description    | character varying(1023) | 
+ title          | character varying(255)  | 
+ follower_count | integer                 | not null default 0
+ usert_handle   | character varying(255)  | not null
+Indexes:
+    "page_pkey" PRIMARY KEY, btree (page_handle)
+Foreign-key constraints:
+    "page_page_handle_fkey" FOREIGN KEY (page_handle) REFERENCES creator(handle)
+    "page_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+Referenced by:
+    TABLE "page_follower" CONSTRAINT "page_follower_page_handle_fkey" FOREIGN KEY (page_handle) REFERENCES page(page_handle)
+
+\d submission
+                                           Table "cs421g16.submission"
+    Column     |            Type             |                             Modifiers                              
+---------------+-----------------------------+--------------------------------------------------------------------
+ submission_id | integer                     | not null default nextval('submission_submission_id_seq'::regclass)
+ text_content  | character varying(8000)     | 
+ like_count    | integer                     | not null default 0
+ creation_time | timestamp without time zone | default now()
+Indexes:
+    "submission_pkey" PRIMARY KEY, btree (submission_id)
+Referenced by:
+    TABLE "commentt" CONSTRAINT "commentt_commentt_id_fkey" FOREIGN KEY (commentt_id) REFERENCES submission(submission_id)
+    TABLE "post" CONSTRAINT "post_post_id_fkey" FOREIGN KEY (post_id) REFERENCES submission(submission_id)
+    TABLE "submission_like" CONSTRAINT "submission_like_submission_id_fkey" FOREIGN KEY (submission_id) REFERENCES submission(submission_id)
+
+\d post
+                     Table "cs421g16.post"
+     Column      |          Type           |     Modifiers      
+-----------------+-------------------------+--------------------
+ post_id         | integer                 | not null
+ view_count      | integer                 | not null default 0
+ attachment_link | character varying(2083) | 
+ image           | character varying(2083) | 
+ handle          | character varying(255)  | not null
+ wall_id         | integer                 | not null
+Indexes:
+    "post_pkey" PRIMARY KEY, btree (post_id)
+Foreign-key constraints:
+    "post_handle_fkey" FOREIGN KEY (handle) REFERENCES creator(handle)
+    "post_post_id_fkey" FOREIGN KEY (post_id) REFERENCES submission(submission_id)
+    "post_wall_id_fkey" FOREIGN KEY (wall_id) REFERENCES wall(wall_id)
+Referenced by:
+    TABLE "commentt" CONSTRAINT "commentt_post_id_fkey" FOREIGN KEY (post_id) REFERENCES post(post_id)
+    TABLE "feed_view" CONSTRAINT "feed_view_post_id_fkey" FOREIGN KEY (post_id) REFERENCES post(post_id)
+
+\d commentt
+             Table "cs421g16.commentt"
+    Column    |          Type          | Modifiers 
+--------------+------------------------+-----------
+ commentt_id  | integer                | not null
+ usert_handle | character varying(255) | not null
+ post_id      | integer                | not null
+Indexes:
+    "commentt_pkey" PRIMARY KEY, btree (commentt_id)
+Foreign-key constraints:
+    "commentt_commentt_id_fkey" FOREIGN KEY (commentt_id) REFERENCES submission(submission_id)
+    "commentt_post_id_fkey" FOREIGN KEY (post_id) REFERENCES post(post_id)
+    "commentt_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+
+\d eventt
+                                         Table "cs421g16.eventt"
+    Column     |            Type             |                         Modifiers                          
+---------------+-----------------------------+------------------------------------------------------------
+ eventt_id     | integer                     | not null default nextval('eventt_eventt_id_seq'::regclass)
+ handle        | character varying(255)      | not null
+ wall_id       | integer                     | not null
+ creation_time | timestamp without time zone | default now()
+ start_time    | timestamp without time zone | not null
+ end_time      | timestamp without time zone | not null
+ title         | character varying(255)      | not null
+ description   | character varying(1023)     | 
+ location      | character varying(255)      | 
+Indexes:
+    "eventt_pkey" PRIMARY KEY, btree (eventt_id)
+    "eventt_wall_id_key" UNIQUE CONSTRAINT, btree (wall_id)
+Foreign-key constraints:
+    "eventt_handle_fkey" FOREIGN KEY (handle) REFERENCES creator(handle)
+    "eventt_wall_id_fkey" FOREIGN KEY (wall_id) REFERENCES wall(wall_id)
+Referenced by:
+    TABLE "eventt_subscription" CONSTRAINT "eventt_subscription_eventt_id_fkey" FOREIGN KEY (eventt_id) REFERENCES eventt(eventt_id)
+
+\d notification
+                                        Table "cs421g16.notification"
+    Column    |            Type             |                            Modifiers                            
+--------------+-----------------------------+-----------------------------------------------------------------
+ notif_id     | integer                     | not null default nextval('notification_notif_id_seq'::regclass)
+ read_status  | boolean                     | 
+ notif_link   | character varying(2083)     | 
+ notif_text   | character varying(1023)     | 
+ notif_time   | timestamp without time zone | default now()
+ usert_handle | character varying(255)      | not null
+Indexes:
+    "notification_pkey" PRIMARY KEY, btree (notif_id)
+Foreign-key constraints:
+    "notification_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+
+\d page_follower
+          Table "cs421g16.page_follower"
+    Column    |          Type          | Modifiers 
+--------------+------------------------+-----------
+ usert_handle | character varying(255) | not null
+ page_handle  | character varying(255) | not null
+Indexes:
+    "page_follower_pkey" PRIMARY KEY, btree (usert_handle, page_handle)
+Foreign-key constraints:
+    "page_follower_page_handle_fkey" FOREIGN KEY (page_handle) REFERENCES page(page_handle)
+    "page_follower_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+
+\d eventt_subscription
+       Table "cs421g16.eventt_subscription"
+    Column    |          Type          | Modifiers 
+--------------+------------------------+-----------
+ usert_handle | character varying(255) | not null
+ eventt_id    | integer                | not null
+ rsvp_status  | character varying(255) | 
+Indexes:
+    "eventt_subscription_pkey" PRIMARY KEY, btree (usert_handle, eventt_id)
+Foreign-key constraints:
+    "eventt_subscription_eventt_id_fkey" FOREIGN KEY (eventt_id) REFERENCES eventt(eventt_id)
+    "eventt_subscription_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+
+\d submission_like
+          Table "cs421g16.submission_like"
+    Column     |          Type          | Modifiers 
+---------------+------------------------+-----------
+ usert_handle  | character varying(255) | not null
+ submission_id | integer                | not null
+Indexes:
+    "submission_like_pkey" PRIMARY KEY, btree (usert_handle, submission_id)
+Foreign-key constraints:
+    "submission_like_submission_id_fkey" FOREIGN KEY (submission_id) REFERENCES submission(submission_id)
+    "submission_like_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+
+\d feed_view
+            Table "cs421g16.feed_view"
+    Column    |          Type          | Modifiers 
+--------------+------------------------+-----------
+ usert_handle | character varying(255) | not null
+ post_id      | integer                | not null
+Indexes:
+    "feed_view_pkey" PRIMARY KEY, btree (usert_handle, post_id)
+Foreign-key constraints:
+    "feed_view_post_id_fkey" FOREIGN KEY (post_id) REFERENCES post(post_id)
+    "feed_view_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+
+\d usert_friend
+           Table "cs421g16.usert_friend"
+    Column     |          Type          | Modifiers 
+---------------+------------------------+-----------
+ usert_handle  | character varying(255) | not null
+ friend_handle | character varying(255) | not null
+Indexes:
+    "usert_friend_pkey" PRIMARY KEY, btree (usert_handle, friend_handle)
+Check constraints:
+    "usert_friend_check" CHECK (usert_handle::text <> friend_handle::text)
+Foreign-key constraints:
+    "usert_friend_friend_handle_fkey" FOREIGN KEY (friend_handle) REFERENCES usert(usert_handle)
+    "usert_friend_usert_handle_fkey" FOREIGN KEY (usert_handle) REFERENCES usert(usert_handle)
+
